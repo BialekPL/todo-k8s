@@ -1,0 +1,1 @@
+d compose build && d compose push && k delete -f .\deployment.yaml && k apply -f .\deployment.yaml

@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  web:
+    build:
+      context: .
+    container_name: flask-todo-app
+    image: bialekpl/flasktodo:1.3
+    ports:
+      - "6124:5000"

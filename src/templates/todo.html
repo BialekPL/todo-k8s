@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Todo</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='css/favicon.ico') }}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <h2>To-do list</h2></br>
+    <h3>Share your tasks with the world...</h3> </br>
+    <form method="post" action="{{ url_for('create_task') }}">
+        <input type="text" name="name" placeholder="Type your task name." autofocus> 
+        <input type="submit" value="Submit">
+    </form>
+    {% for task in tasks %}
+        <div class="task">
+            <p>{{ task.name }}</p>
+            <form method="post" action="{{ url_for('delete_task') }}">
+                <input type="hidden" name="id" value="{{ task.id }}">
+                <input type="submit" value="✔">
+            </form>
+        </div>
+    {% endfor %}
+</body>
+</html>
