@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-todo
-  namespace: secret-test
+  namespace: flask-todo
 spec:
   selector:
     matchLabels:
