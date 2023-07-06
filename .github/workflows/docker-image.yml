@@ -50,6 +50,7 @@ jobs:
   DeployProd:  
     name: Build and push Docker image with prod tag
     runs-on: ubuntu-latest
+    needs: DeployStaging
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
