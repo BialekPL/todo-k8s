@@ -1,18 +1,20 @@
 name: Docker build and push to ACR
 
 on:
-  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
 
   DeployDev:  
-    name:  \[DEV\] Build and push Docker image
+    name:  "[DEV] Build and push Docker image"
     runs-on: ubuntu-latest
     if: github.event == 'pull_request'
+    environment:
+      name: dev
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
@@ -29,9 +31,11 @@ jobs:
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flasktodo:dev
 
   DeployStaging:
-    name: \[STAGE\] Build and push Docker image
+    name: "[STAGE] Build and push Docker image"
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # after merging pull request / pushing to main
+    environment:
+      name: stage
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
@@ -48,9 +52,11 @@ jobs:
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flasktodo:stage
       
   DeployProd:  
-    name: \[PROD\] Build and push Docker image
+    name: "[PROD] Build and push Docker image"
     runs-on: ubuntu-latest
     needs: [DeployStaging]
+    environment:
+      name: prod
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
