@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: flask-todo
-        image: todok8sacr25hjk3.azurecr.io/flasktodo:stage
+        image: todok8sacr25hjk3.azurecr.io/flasktodo:dev
         imagePullPolicy: Always
         resources:
           requests:
