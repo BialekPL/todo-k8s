@@ -10,7 +10,7 @@ on:
 jobs:
 
   DeployDev:  
-    name: Build and push Docker image with dev tag
+    name:  \[DEV\] Build and push Docker image
     runs-on: ubuntu-latest
     if: github.event == 'pull_request'
     steps:  
@@ -29,9 +29,9 @@ jobs:
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flasktodo:dev
 
   DeployStaging:
-    name: Build and push Docker image with stage tag
+    name: \[STAGE\] Build and push Docker image
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # after merging pull request
+    if: github.ref == 'refs/heads/main' # after merging pull request / pushing to main
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
@@ -48,9 +48,9 @@ jobs:
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flasktodo:stage
       
   DeployProd:  
-    name: Build and push Docker image with prod tag
+    name: \[PROD\] Build and push Docker image
     runs-on: ubuntu-latest
-    needs: DeployStaging
+    needs: [DeployStaging]
     steps:  
     - uses: Azure/docker-login@v1.0.1
       with:
