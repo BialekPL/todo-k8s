@@ -37,13 +37,24 @@ jobs:
     name: Build and push Docker image with stage tag
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # after merging pull request
-    needs: ACR-Login
+    # needs: ACR-Login
     steps:  
+    - uses: Azure/docker-login@v1.0.1
+      with:
+        # Container registry username
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        # Container registry password
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        # Container registry server url
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      
+      
     - uses: docker/build-push-action@v4.1.1
       with:
         push: true
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flasktodo:stage
-
+      
+      
 
   DeployProd:  
     name: Build and push Docker image with prod tag
