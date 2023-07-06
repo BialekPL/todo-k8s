@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-todo-service
+  name: flask-todo-service-stage
   namespace: flask-todo
 spec:
   type: LoadBalancer
   selector:
-    app: flask-todo
+    app: flask-todo-stage
   ports:
   - port: 80
     targetPort: 5000
