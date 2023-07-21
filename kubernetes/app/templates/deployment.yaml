@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-todo-dev
-  namespace: flask-todo
+  name: {{ .Values.appName }}-{{ .Values.env }}
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
-      app: flask-todo-dev
-  replicas: 2
+      app: {{ .Values.appName }}-{{ .Values.env }}
+  replicas: {{ .Values.replicas }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,11 +16,11 @@ spec:
   template:
     metadata:
       labels:
-        app: flask-todo-dev
+        app: {{ .Values.appName }}-{{ .Values.env }}
     spec:
       containers:
-      - name: flask-todo-dev
-        image: todok8sacr25hjk3.azurecr.io/flasktodo:dev
+      - name: app
+        image: {{ .Values.imageRepository }}/{{ .Values.imageTag }}
         imagePullPolicy: Always
         resources:
           requests:

@@ -1,0 +1,5 @@
+appName: flask-todo
+env: dev
+namespace: flask-todo
+replicas: 2
+imageRepository: todok8sacr25hjk3.azurecr.io
