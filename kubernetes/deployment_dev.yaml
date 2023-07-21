@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-todo
+  name: flask-todo-dev
   namespace: flask-todo
 spec:
   selector:
     matchLabels:
-      app: flask-todo
+      app: flask-todo-dev
   replicas: 2
   strategy:
     type: RollingUpdate
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: flask-todo
+        app: flask-todo-dev
     spec:
       containers:
-      - name: flask-todo
+      - name: flask-todo-dev
         image: todok8sacr25hjk3.azurecr.io/flasktodo:dev
         imagePullPolicy: Always
         resources:
